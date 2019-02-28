@@ -9,7 +9,7 @@ using namespace std;
 
 vector<double> q1(int n);
 void q2(vector<double> v);
-vector<double> q3(vector<double> v1,vector<double> v2
+vector<double> q3(vector<double> v1,vector<double> v2);
 
 /* FONCTIONS */
 
@@ -33,13 +33,14 @@ void q2(vector<double> v){
 vector<double> q3(vector<double> v1,vector<double> v2){
   vector<double> somme;
   if(v1.size() == v2.size()){
-    for(int i = 0; i < size(v1); i++){
-      somme.push_back(v1[i] + v2[i])
+    for(int i = 0; i < v1.size(); i++){
+      somme.push_back(v1[i] + v2[i]);
     }
   }
   else{
-    cout << "Les vecteurs ne font pas la même taille !" << endl;}
-  return somme
+    cout << "Les vecteurs ne font pas la même taille !" << endl;
+  }
+  return somme;
 }
 
 /* MAIN */
