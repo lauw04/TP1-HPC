@@ -5,22 +5,27 @@
 
 using namespace std;
 
-void q1(int n);
+vector<double> q1(int n);
 
-void q1(int n){
+vector<double> q1(int n){
   vector<double> v;
   double nb_aleatoire = 0;
   for(int i = 0; i < n; i++)
      {
         nb_aleatoire = rand();
-        cout << nb_aleatoire << endl;
         v.push_back(nb_aleatoire);
      }
+  return v;
 }
 
 
 int main(){
   cout << "Hello World!" << endl;
-  q1(10);
+  vector<double> v1 = q1(10);
+  vector<double>::iterator it; 
+  for(it = v1.begin(); it!=v1.end(); ++it)
+    {
+        cout << *it << endl;
+    }
   return 0;
 }
