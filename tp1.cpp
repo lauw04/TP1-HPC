@@ -10,6 +10,7 @@ using namespace std;
 vector<double> q1(int n);
 void q2(vector<double> v);
 vector<double> q3(vector<double> v1,vector<double> v2);
+double q4(vector<double> v);
 
 /* FONCTIONS */
 
@@ -43,6 +44,14 @@ vector<double> q3(vector<double> v1,vector<double> v2){
   return somme;
 }
 
+double q4(vector<double> v){
+  double somme = 0;
+  for(int i = 0; i < v.size(); i++){
+    somme += v[i];
+  }
+  return somme;
+}
+
 /* MAIN */
 
 int main(){
@@ -51,5 +60,7 @@ int main(){
   vector<double> v2 = q1(10);
   vector<double> v3 = q3(v1,v2);
   q2(v3);
+  double a = q4(v3);
+  cout << a << endl;
   return 0;
 }
