@@ -1,3 +1,0 @@
-/home/mmancini/4emean/TP1-HPC/build/CMakeFiles/rebuild_cache.dir
-/home/mmancini/4emean/TP1-HPC/build/CMakeFiles/tp1.dir
-/home/mmancini/4emean/TP1-HPC/build/CMakeFiles/edit_cache.dir
