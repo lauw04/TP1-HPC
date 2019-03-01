@@ -12,6 +12,7 @@ vector<double> q1(int n);
 void q2(vector<double> v);
 vector<double> q3(vector<double> v1,vector<double> v2);
 double q4(vector<double> v);
+vector<double> q8(vector<double> v, double x);
 
 /* FONCTIONS */
 
@@ -53,6 +54,14 @@ double q4(vector<double> v){
   return somme;
 }
 
+vector<double> q8(vector<double> v, double x){
+  vector<double> result;
+  for(int i = 0; i < v.size(); i++){
+    result.push_back(x*v[i]);
+  }
+  return result;
+}
+
 /* MAIN */
 
 int main(){
@@ -74,5 +83,13 @@ int main(){
   q2(v3);
   double a = q4(v3);
   cout << a << endl;
+
+  // Question 8
+  int x = 3;
+  cout << "v3" << endl;
+  q2(v3);
+  vector<double> v4 = q8(v3,x);
+  cout << "v4" << endl;
+  q2(v4);
   return 0;
 }
