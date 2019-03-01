@@ -16,6 +16,7 @@ double q4(vector<double> v);
 vector<double> q8(vector<double> v, double x);
 vector<vector<double>> q10_1(int n, int m);
 void q10_2(vector<vector<double>> v);
+vector<vector<double>> q10_3(vector<vector<double>> v1, vector<vector<double>> v2);
 
 /* FONCTIONS */
 
@@ -99,6 +100,24 @@ void q10_2(vector<vector<double>> v){
 	} 
 }
 
+vector<vector<double>> q10_3(vector<vector<double>> v1, vector<vector<double>> v2){
+  vector<vector<double>> somme = v1;
+  size_t n1 = v1.size();
+  size_t m1 = v1[1].size();
+  size_t n2 = v2.size();
+  size_t m2 = v2[1].size();
+  if(n1 == n2 and m1 == m2){
+    for(int i = 0; i < v1.size(); i++){
+      for(int j=0; j<v1[i].size(); j++){
+        somme[i][j]=(v1[i][j] + v2[i][j]);
+      }
+    }
+  }
+  else{
+    cout << "Les matrices ne font pas la même taille !" << endl;
+  }
+  return somme;
+}
 /* MAIN */
 
 int main(){
@@ -150,5 +169,9 @@ int main(){
   // Question 10
   vector<vector<double>> v5 = q10_1(3,4);
   q10_2(v5);
+  vector<vector<double>> v6 = q10_1(3,4);
+  q10_2(v6);
+  vector<vector<double>> v7 = q10_3(v6, v7);
+  q10_2(v7);
   return 0;
 }
