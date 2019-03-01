@@ -34,14 +34,18 @@ void q2(vector<double> v){
 }
 
 vector<double> q3(vector<double> v1,vector<double> v2){
-  vector<double> somme;
+  vector<double> somme = v1;
+  #pragma omp parallel
+  {
   if(v1.size() == v2.size()){
+    #pragma omp for
     for(int i = 0; i < v1.size(); i++){
-      somme.push_back(v1[i] + v2[i]);
+      somme[i]=(v1[i] + v2[i]);
     }
   }
   else{
     cout << "Les vecteurs ne font pas la même taille !" << endl;
+  }
   }
   return somme;
 }
@@ -56,9 +60,13 @@ double q4(vector<double> v){
 }
 
 vector<double> q8(vector<double> v, double x){
-  vector<double> result;
+  vector<double> result= v;
+  #pragma omp parallel
+  {
+  #pragma omp for
   for(int i = 0; i < v.size(); i++){
-    result.push_back(x*v[i]);
+    result[i]=(x*v[i]);
+  }
   }
   return result;
 }
