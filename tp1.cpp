@@ -13,6 +13,8 @@ void q2(vector<double> v);
 vector<double> q3(vector<double> v1,vector<double> v2);
 double q4(vector<double> v);
 vector<double> q8(vector<double> v, double x);
+vector<vector<double>> q10_1(int n, int m);
+void q10_2(vector<vector<double>> v);
 
 /* FONCTIONS */
 
@@ -62,6 +64,31 @@ vector<double> q8(vector<double> v, double x){
   return result;
 }
 
+vector<vector<double>> q10_1(int n, int m){
+  vector<vector<double>> v;
+  v.resize(n);
+  for(int i=0; i<n; i++){
+    v[i].resize(m);
+  }
+  double nb_aleatoire = 0;
+  for(int i = 0; i < n; i++){
+    for(int j=0; j<m; j++){
+      nb_aleatoire = rand()%100;
+      v[i][j] =  nb_aleatoire;
+    }
+  }
+  return v;
+}
+
+void q10_2(vector<vector<double>> v){
+	for(int i = 0; i < v.size(); i++){
+    for(int j=0; j<v[1].size(); j++){
+      cout << v[i][j] << endl;
+    }
+    cout << "\n" << endl;
+	} 
+}
+
 /* MAIN */
 
 int main(){
@@ -91,5 +118,9 @@ int main(){
   vector<double> v4 = q8(v3,x);
   cout << "v4" << endl;
   q2(v4);
+
+  // Question 10
+  vector<vector<double>> v5 = q10_1(3,4);
+  q10_2(v5);
   return 0;
 }
