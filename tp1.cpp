@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <omp.h>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ vector<double> q1(int n){
   double nb_aleatoire = 0;
   for(int i = 0; i < n; i++)
      {
-        nb_aleatoire = rand();
+        nb_aleatoire = rand()%100;
         v.push_back(nb_aleatoire);
      }
   return v;
@@ -56,8 +57,19 @@ double q4(vector<double> v){
 
 int main(){
   cout << "Hello World!" << endl;
-  vector<double> v1 = q1(10);
-  vector<double> v2 = q1(10);
+
+
+  int num_threads = 0;
+  int k = 0;
+  cout << "Combien de coeurs on utilise ?" << endl;
+  cin >> num_threads;
+  cout << "On utilise donc " << num_threads << " coeurs." << endl;
+  omp_set_num_threads(num_threads);
+  cout << "La longueur du vecteur ?" << endl;
+  cin >> k;
+  cout << "Les vecteurs vont contenir " << k << " valeurs." << endl;
+  vector<double> v1 = q1(k);
+  vector<double> v2 = q1(k);
   vector<double> v3 = q3(v1,v2);
   q2(v3);
   double a = q4(v3);
