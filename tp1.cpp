@@ -2,6 +2,7 @@
 #include <vector>
 #include <cstdlib>
 #include <ctime>
+#include <omp.h>
 
 using namespace std;
 
@@ -20,6 +21,7 @@ vector<double> q1(int n){
   for(int i = 0; i < n; i++)
      {
         nb_aleatoire = rand();
+        cout << nb_aleatoire << endl;
         v.push_back(nb_aleatoire);
      }
   return v;
