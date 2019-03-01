@@ -50,6 +50,7 @@ vector<double> q3(vector<double> v1,vector<double> v2){
 
 double q4(vector<double> v){
   double somme = 0;
+  #pragma omp parallel for reduction (+:somme)
   for(int i = 0; i < v.size(); i++){
     somme += v[i];
   }
@@ -112,12 +113,13 @@ int main(){
   cout << a << endl;
 
   // Question 8
-  int x = 3;
-  cout << "v3" << endl;
-  q2(v3);
-  vector<double> v4 = q8(v3,x);
-  cout << "v4" << endl;
-  q2(v4);
+  int x = 1;
+  cout << "Par combien multiplie-t-on notre vecteur ?" << endl;
+  cin >> x;
+  cout << "On multiple le vecteur " << x << " fois." << endl;
+  vector<double> vecteur_mult = q8(v3,x);
+  cout << "vecteur_mult" << endl;
+  q2(vecteur_mult);
 
   // Question 10
   vector<vector<double>> v5 = q10_1(3,4);
