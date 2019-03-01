@@ -83,10 +83,10 @@ vector<vector<double>> q10_1(int n, int m){
 
 void q10_2(vector<vector<double>> v){
 	for(int i = 0; i < v.size(); i++){
-    for(int j=0; j<v[1].size(); j++){
-      cout << v[i][j] << endl;
+    for(int j=0; j<v[i].size(); j++){
+      cout << v[i][j] << " ";
     }
-    cout << "\n" << endl;
+    cout << endl;
 	} 
 }
 
