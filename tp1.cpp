@@ -13,7 +13,8 @@ vector<double> q1(int n);
 void q2(vector<double> v);
 vector<double> q3(vector<double> v1,vector<double> v2);
 double q4(vector<double> v);
-void q9(int num_threads);
+vector<double> q8(vector<double> v, double x);
+//void q9();
 
 /* FONCTIONS */
 
@@ -34,34 +35,44 @@ void q2(vector<double> v){
 	} 
 }
 
-vector<double> q3(vector<double> v1,vector<double> v2){
-  vector<double> somme;
+vector<double> q3(vector<double> v1,vector<double> v2, int num_threads){
+  vector<double> addition;
   if(v1.size() == v2.size()){
     for(int i = 0; i < v1.size(); i++){
-      somme.push_back(v1[i] + v2[i]);
+      addition.push_back(v1[i] + v2[i]);
     }
   }
   else{
     cout << "Les vecteurs ne font pas la même taille !" << endl;
   }
-  return somme;
+  return addition;
 }
 
-double q4(vector<double> v){
+double q4(vector<double> v, int num_threads){
   double somme = 0;
+  #pragma omp parallel for reduction (+:somme)
   for(int i = 0; i < v.size(); i++){
     somme += v[i];
   }
   return somme;
 }
 
-void q9fort(){
+vector<double> q8(vector<double> v, double x, int num_threads){
+  vector<double> result;
+  for(int i = 0; i < v.size(); i++){
+    result.push_back(x*v[i]);
+  }
+  return result;
+}
+
+/*void q9fort(){
 	std::chrono::time_point<std::chrono::system_clock> start, end;
 	vector<double> v1 = q1(500);
 	vector<double> v2 = q1(500);
+	double x = 4;
 	int coeur[3] = {1, 2, 4}; //Nombre de coeurs à tester
 	
-	/* ADDITION */
+	
 	vector<int> addition;
 	for(int i = 0; i < 3; i++){
 		start = std::chrono::system_clock::now();
@@ -71,7 +82,6 @@ void q9fort(){
     addition.push_back(elapsed_seconds);
   }
   
-	/* SOMME */
 	vector<int> somme;
 	for(int i = 0; i < 3; i++){
 		start = std::chrono::system_clock::now();
@@ -81,22 +91,22 @@ void q9fort(){
     somme.push_back(elapsed_seconds);
   }
 
-	/* MULTIPLICATION */
-	vector<int> somme;
+	
+	vector<int> multi;
 	for(int i = 0; i < 3; i++){
 		start = std::chrono::system_clock::now();
-		int result = q8(v1, coeur[i]);
+		int result = q8(v1, x, coeur[i]);
 		end = std::chrono::system_clock::now();
     int elapsed_seconds = std::chrono::duration_cast<std::chrono::seconds> (end-start).count();
-    somme.push_back(elapsed_seconds);
+    multi.push_back(elapsed_seconds);
   }
-}
+}*/
 
 /* MAIN */
 
 int main(){
   cout << "Hello World!" << endl;
-
+	
 
   int num_threads = 0;
   int k = 0;
@@ -107,14 +117,32 @@ int main(){
   cout << "La longueur du vecteur ?" << endl;
   cin >> k;
   cout << "Les vecteurs vont contenir " << k << " valeurs." << endl;
-  
   vector<double> v1 = q1(k);
   vector<double> v2 = q1(k);
-  vector<double> v3 = q3(v1,v2, num_threads);
-  q2(v3);
-  double a = q4(v3);
-  cout << a << endl;
   
   
+  /* ADDITION */
+  
+  chrono::time_point<chrono::system_clock> start, end;
+	start = std::chrono::system_clock::now();  
+  vector<double> addition = q3(v1, v2);
+	end = chrono::system_clock::now();
+  int elapsed_seconds = chrono::duration_cast<chrono::seconds> (end-start).count();
+	std::time_t end_time = chrono::system_clock::to_time_t(end);
+  cout << "Temps d'éxécution de l'addtion de deux vecteurs de taille" << k << "avec" << num_threads << "coeur(s) : " << elapsed_seconds << ctime(&end_time);
+
+	/* SOMME */
+	
+	/* MULTIPLICATION */
+  // Question 8
+  int x = 1;
+  cout << "Par combien multiplie-t-on notre vecteur ?" << endl;
+  cin >> x;
+  cout << "On multiple le vecteur " << x << " fois." << endl;
+  vector<double> vecteur_mult = q8(v3,x,num_threads);
+  cout << "vecteur_mult" << endl;
+  q2(vecteur_mult);
   return 0;
+  
+  
 }
